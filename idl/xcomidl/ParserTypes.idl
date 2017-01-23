@@ -1,0 +1,42 @@
+import "xcom/metadata/MDTypes.idl";
+
+namespace xcomidl
+{
+    enum CodeGenHint
+    {
+        GenImport,      // parameter is name of the imported file
+        GenType,        // parameter is name of the type for codegen
+        GenForward,     // parameter is name of interface for forward dcl. 
+        EnterNamespace, // parameter is name of namespace
+        LeaveNamespace  // parameter is name of namespace
+    }
+        
+    struct Hint
+    {
+        CodeGenHint type;
+        string parameter;
+    }
+    
+    sequence<Hint> HintSeq;
+    sequence<xcom::metadata::IType> TypeSeq;
+    
+    interface IParser ("69201075-bce9-490c-b003-8c5274c8364b")
+        extends xcom::IUnknown
+    {
+        bool parse(in xcom::StringSeq includePaths,
+                   in string idlFile,
+                   out TypeSeq types,
+                   out HintSeq hints,
+                   out xcom::StringSeq messages);
+    }
+
+    interface ICodeGen ("9eaf1b9f-b5a9-4784-8a8b-41bead9d47aa")
+        extends xcom::IUnknown
+    {
+        void generate(in TypeSeq types,
+                      in HintSeq hints,
+                      in string idlFileName,
+                      in xcom::StringSeq options);
+    }
+}
+
