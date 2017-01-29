@@ -1,4 +1,6 @@
 FILE(GLOB sources *.cpp)
 ADD_LIBRARY(xcomidl_cppgen SHARED ${sources})
 SET_TARGET_PROPERTIES(xcomidl_cppgen PROPERTIES PREFIX "")
-INSTALL(TARGETS xcomidl_cppgen LIBRARY DESTINATION /lib)
+INSTALL(TARGETS xcomidl_cppgen LIBRARY DESTINATION lib)
+FILE(WRITE "${CMAKE_BINARY_DIR}/xcomidl.config" "${CMAKE_INSTALL_PREFIX}/lib\n")
+INSTALL(FILES "${CMAKE_BINARY_DIR}/xcomidl.config" DESTINATION bin)
