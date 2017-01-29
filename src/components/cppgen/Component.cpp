@@ -35,6 +35,7 @@
 #include "Helper.hpp"
 
 #include <fstream>
+#include <algorithm>
 
 namespace
 {
