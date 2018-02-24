@@ -9,8 +9,14 @@ endif()
 
 set(XCOM_LIB_ROOT "/usr/lib" CACHE FILEPATH "xcom library root")
 
-if(NOT EXISTS "${XCOM_LIB_ROOT}/libxcom.so")
-    message(SEND_ERROR "Can't find libxcom.so in ${XCOM_LIB_ROOT}")
+if (WIN32)
+  if(NOT EXISTS "${XCOM_LIB_ROOT}/xcom.lib")
+      message(SEND_ERROR "Can't find libxcom.so in ${XCOM_LIB_ROOT}")
+  endif()
+else()
+  if(NOT EXISTS "${XCOM_LIB_ROOT}/libxcom.so")
+      message(SEND_ERROR "Can't find libxcom.so in ${XCOM_LIB_ROOT}")
+  endif()
 endif()
 
 LINK_DIRECTORIES(${XCOM_LIB_ROOT})

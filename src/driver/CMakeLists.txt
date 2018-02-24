@@ -1,5 +1,8 @@
 FILE(GLOB sources *.cpp)
 LINK_DIRECTORIES(${XCOM_LIBRARY_DIR})
 LINK_LIBRARIES(xcom)
+if (WIN32)
+  LINK_LIBRARIES(Rpcrt4 Shlwapi)
+endif()
 ADD_EXECUTABLE(xcomidl ${sources})
 INSTALL(TARGETS xcomidl RUNTIME DESTINATION bin)
